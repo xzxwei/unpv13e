@@ -10,13 +10,13 @@ main(int argc, char **argv)
 	if (argc != 2)
 		err_quit("usage: a.out <IPaddress>");
 
-	if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)  //Address Family Internet
 		err_sys("socket error");
 
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
-	servaddr.sin_port   = htons(13);	/* daytime server */
-	if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0)
+	servaddr.sin_port   = htons(13);	/* daytime server */  //host to network short
+	if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0)   //Internet Protocol String to Number
 		err_quit("inet_pton error for %s", argv[1]);
 
 	if (connect(sockfd, (SA *) &servaddr, sizeof(servaddr)) < 0)
